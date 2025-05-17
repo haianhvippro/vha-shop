@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chủ - VoHaiAnh Shop</title>
+  <link rel="stylesheet" href="za.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .user-info {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .user-info:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    #user-dropdown {
+      display: none;
+      margin-left: 20px;
+      color: white;
+      background-color: #333;
+      padding: 10px;
+      border-radius: 8px;
+      position: absolute;
+      top: 50px;
+    }
+    #user-dropdown a {
+      display: block;
+      margin: 5px 0;
+      color: white;
+      text-decoration: none;
+    }
+    #user-dropdown a:hover {
+      text-decoration: underline;
+    }
+    .topup-btn {
+      background-color: #ff9900;
+      padding: 8px 16px;
+      border-radius: 5px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .topup-btn:hover {
+      background-color: #e68a00;
+    }
+    .user-info-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="user-info-container">
+        <span id="user-info" class="user-info" onclick="toggleUserInfo()"></span>
+        <a href="balance.html" class="topup-btn">Kiểm tra số dư</a>
+        <a href="topup.html" class="topup-btn">Nạp tiền</a>
+      </div>
+      <span>|</span>
+      <a href="tel:0906941670">Zalo: 0906941670</a>
+      <span>|</span>
+      <a href="https://www.facebook.com/VoHaiAnh.2104" target="_blank">Facebook</a>
+    </div>
+    <div class="nav-bar">
+      <div class="logo">VoHaiAnh Shop</div>
+      <nav>
+        <a href="#">Trang chủ</a>
+        <a href="#">Sản phẩm</a>
+        <a href="#">Khuyến mãi</a>
+        <a href="#">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Chào mừng đến với VoHaiAnh Shop</h1>
+    <p>Shop bán code, tool, tài khoản, dịch vụ uy tín hàng đầu Việt Nam</p>
+    <a href="#" class="btn">Khám phá ngay</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 VoHaiAnh Shop. All rights reserved.</p>
+  </footer>
+
+  <script>
+    window.onload = function () {
+      const username = sessionStorage.getItem('username');
+      const userInfo = document.getElementById('user-info');
+      if (!username) {
+        userInfo.innerHTML = '<a href="login.html">Đăng nhập</a>';
+        return;
+      }
+      userInfo.textContent = `Chào, ${username}`;
+    }
+  </script>
+</body>
+</html>

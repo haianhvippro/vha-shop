@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Nạp tiền - VoHaiAnh Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Fullscreen video background */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Ensure video is in the background */
+    }
+
+    /* Container with semi-transparent background and box shadow */
+    .container {
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      z-index: 1;
+      position: relative;
+      background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Add additional box with light opacity for effect */
+    .content-box {
+      background: rgba(0, 0, 0, 0.5); /* Darker background for contrast */
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+      width: 100%;
+      max-width: 500px; /* Limit width */
+      margin-top: 20px;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #ffcc00; /* Màu vàng cho tiêu đề */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Hiệu ứng đổ bóng cho tiêu đề */
+    }
+
+    .description {
+      font-size: 1.3rem;
+      color: #ffcc00; /* Màu vàng cho phần mô tả */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Hiệu ứng đổ bóng cho mô tả */
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn-zalo {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #007bff;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .btn-zalo:hover {
+      background-color: #0056b3;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video background -->
+  <video class="video-background" autoplay loop muted>
+    <source src="https://r2.guns.lol/6b48baf2-88fd-4a03-8243-805cb18beb0f.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Main content -->
+  <div class="container">
+    <div class="content-box">
+      <h2>Nạp tiền vào tài khoản</h2>
+      <p class="description">Để nạp tiền vào tài khoản, vui lòng nhắn tin trực tiếp qua Zalo shop:</p>
+      <a href="https://za.me/0906941670" class="btn-zalo" target="_blank">Nhắn tin qua Zalo</a>
+      <div class="message" id="message"></div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      const username = sessionStorage.getItem('username');
+      const message = document.getElementById('message');
+
+      if (username) {
+        message.textContent = `Chào ${username}, vui lòng nhắn tin để nạp tiền.`;
+      }
+    };
+  </script>
+</body>
+</html>

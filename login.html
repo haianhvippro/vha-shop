@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập / Đăng ký - VoHaiAnh Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ffcc00);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: rgba(0,0,0,0.85);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      color: white;
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+      background: linear-gradient(90deg, #ff4d4d, #ffcc00);
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .switch {
+      text-align: center;
+      margin-top: 12px;
+      cursor: pointer;
+      color: #ffcc00;
+      text-decoration: underline;
+    }
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .optional {
+      display: none;
+    }
+    .loading {
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="formTitle">Đăng nhập</h2>
+    <input type="text" id="username" placeholder="Tên tài khoản">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    
+    <div class="optional">
+      <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu">
+      <input type="email" id="email" placeholder="Email">
+      <input type="text" id="phone" placeholder="Số điện thoại">
+    </div>
+
+    <button onclick="handleSubmit()">Đăng nhập</button>
+
+    <div class="switch" onclick="toggleForm()">Chưa có tài khoản? Đăng ký</div>
+    <div class="message" id="message"></div>
+    <div class="loading" id="loading" style="display:none;">Đang chờ xử lý...</div>
+  </div>
+
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzP26kJta8u7dkzooKl8GawIM3z1WlUtil25DoUseH9O-BGQAaAsXbckNg7xYkXFUhZ/exec';
+    let isLogin = true;
+
+    function toggleForm() {
+      const title = document.getElementById('formTitle');
+      const button = document.querySelector('button');
+      const switchText = document.querySelector('.switch');
+      const message = document.getElementById('message');
+      const optionalFields = document.querySelector('.optional');
+
+      isLogin = !isLogin;
+      title.textContent = isLogin ? 'Đăng nhập' : 'Đăng ký';
+      button.textContent = isLogin ? 'Đăng nhập' : 'Đăng ký';
+      switchText.textContent = isLogin ? 'Chưa có tài khoản? Đăng ký' : 'Đã có tài khoản? Đăng nhập';
+      message.textContent = '';
+
+      optionalFields.style.display = isLogin ? 'none' : 'block';
+    }
+
+    function handleSubmit() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message');
+      const loading = document.getElementById('loading');
+
+      if (!username || !password) {
+        message.style.color = 'red';
+        message.textContent = 'Vui lòng nhập đầy đủ tài khoản và mật khẩu!';
+        return;
+      }
+
+      const params = new URLSearchParams();
+      params.append('action', isLogin ? 'login' : 'register');
+      params.append('username', username);
+      params.append('password', password);
+
+      if (!isLogin) {
+        if (!confirmPassword || !email || !phone) {
+          message.style.color = 'red';
+          message.textContent = 'Vui lòng nhập đầy đủ thông tin đăng ký!';
+          return;
+        }
+        params.append('confirmPassword', confirmPassword);
+        params.append('email', email);
+        params.append('phone', phone);
+      }
+
+      loading.style.display = 'block';  // Hiển thị thông báo "đang chờ xử lý"
+      fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params
+      })
+      .then(res => res.json())
+      .then(data => {
+        loading.style.display = 'none';  // Ẩn thông báo "đang chờ xử lý"
+        message.style.color = data.status === 'success' ? 'lightgreen' : 'red';
+        message.textContent = data.message;
+
+        if (data.status === 'success' && isLogin) {
+          const usernameFromAPI = data.username || username;
+          sessionStorage.setItem('username', usernameFromAPI);
+          setTimeout(() => {
+            window.location.href = 'a.html';  // Điều hướng sau khi đăng nhập thành công
+          }, 1500);
+        }
+      })
+      .catch(err => {
+        loading.style.display = 'none';  // Ẩn thông báo "đang chờ xử lý"
+        message.style.color = 'red';
+        message.textContent = 'Lỗi kết nối: ' + err;
+      });
+    }
+  </script>
+</body>
+</html>
