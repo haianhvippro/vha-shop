@@ -3,60 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Trang chủ - VoHaiAnh Shop</title>
-  <link rel="stylesheet" href="za.css">
+  <link rel="stylesheet" href="zindex.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    .user-info {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #333;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .user-info:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-    #user-dropdown {
-      display: none;
-      margin-left: 20px;
-      color: white;
-      background-color: #333;
-      padding: 10px;
-      border-radius: 8px;
-      position: absolute;
-      top: 50px;
-    }
-    #user-dropdown a {
-      display: block;
-      margin: 5px 0;
-      color: white;
-      text-decoration: none;
-    }
-    #user-dropdown a:hover {
-      text-decoration: underline;
-    }
-    .topup-btn {
-      background-color: #ff9900;
-      padding: 8px 16px;
-      border-radius: 5px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-    .topup-btn:hover {
-      background-color: #e68a00;
-    }
-    .user-info-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -71,21 +19,77 @@
       <span>|</span>
       <a href="https://www.facebook.com/VoHaiAnh.2104" target="_blank">Facebook</a>
     </div>
+
     <div class="nav-bar">
       <div class="logo">VoHaiAnh Shop</div>
       <nav>
         <a href="#">Trang chủ</a>
         <a href="#">Sản phẩm</a>
         <a href="#">Khuyến mãi</a>
-        <a href="#">Liên hệ</a>
+        <a href="https://haianhvippro.github.io/Introduce-yourself/">Liên hệ</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
     <h1>Chào mừng đến với VoHaiAnh Shop</h1>
-    <p>Shop bán code, tool, tài khoản, dịch vụ uy tín hàng đầu Việt Nam</p>
+    <p>Shop chuyên bán code, tool, tài khoản & dịch vụ chất lượng - uy tín hàng đầu</p>
     <a href="#" class="btn">Khám phá ngay</a>
+  </section>
+
+  <section class="features">
+    <h2>Tại sao chọn chúng tôi?</h2>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <h3>Uy tín hàng đầu</h3>
+        <p>Chúng tôi cam kết đem đến sản phẩm chuẩn, đúng mô tả, đúng chất lượng.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Hỗ trợ 24/7</h3>
+        <p>Luôn đồng hành cùng bạn mọi lúc qua Zalo, Facebook hoặc Live Chat.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Giao dịch an toàn</h3>
+        <p>Hệ thống tự động, nạp tiền nhanh chóng, bảo mật thông tin người dùng.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+  <h2>Khách hàng nói gì?</h2>
+  <div class="testimonial-list">
+    <a class="testimonial" href="https://example.com/feedback1" target="_blank">
+      <p>"Dịch vụ cực kỳ tốt, hỗ trợ nhanh, mua lần nào cũng hài lòng!"</p>
+      <span>- Nguyễn Văn A</span>
+    </a>
+    <a class="testimonial" href="https://example.com/feedback2" target="_blank">
+      <p>"Shop đáng tin cậy, code chất lượng, mình sẽ quay lại!"</p>
+      <span>- Trần Thị B</span>
+    </a>
+    <a class="testimonial" href="https://example.com/feedback3" target="_blank">
+      <p>"Mọi thứ tự động, không phải chờ đợi, quá tiện lợi!"</p>
+      <span>- Lê Cường</span>
+    </a>
+  </div>
+</section>
+
+
+  <section class="partners">
+    <h2>Liên Hệ</h2>
+    <div class="social-links">
+      <a href="https://www.facebook.com/VoHaiAnh.2104" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/nah_.sotrax/" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      </a>
+      <a href="https://discord.gg/QW7TRh78ub" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">
+      </a>
+      <a href="https://www.tiktok.com/@zhizhi.2104" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok">
+      </a>
+    </div>
   </section>
 
   <footer>
@@ -97,11 +101,11 @@
       const username = sessionStorage.getItem('username');
       const userInfo = document.getElementById('user-info');
       if (!username) {
-        userInfo.innerHTML = '<a href="login.html">Đăng nhập</a>';
+        userInfo.innerHTML = '<a href="login.html" style="color:white;">Đăng nhập</a>';
         return;
       }
       userInfo.textContent = `Chào, ${username}`;
-    }
+    };
   </script>
 </body>
 </html>
